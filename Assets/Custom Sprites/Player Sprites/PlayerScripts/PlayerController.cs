@@ -8,51 +8,98 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
     private Rigidbody2D rb;
     private Vector2 velocity;
-    public bool isOnFloor = false;
+    bool rightJump = false;
+    bool leftJump = false;
+    bool stopChecker = true; //something to check isOnFloor against.
+    public bool isOnFloor = false; //check if the player is on the floor.
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>(); //Initialize the Physics object.
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), 0);
-        velocity = moveInput * speed;
         
         
     }
 
-    void FixedUpdate()
+    void FixedUpdate() //All the command functions will be nested here, FixedUpdate is better for Physics
     {
-        
-        rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
-        //rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
-        //if (counter < 50)
-        //{
-        //    counter += 1;
-        //}
-        //else
-        //{
-        //    Debug.Log("jump");
-        //    counter = 0;
-        //    rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
-        //}
-        Jump();
-        if (!isOnFloor)
+        if (isOnFloor == true)
         {
-            rb.AddForce(new Vector2(0, -jumpSpeed/5), ForceMode2D.Impulse);
+            resetJump();
+            Jump();
+            Move();
+        }
+        else if (isOnFloor == false)
+        {
+            maintainJump();
         }
     }
 
     void Jump()
     {
-        if (Input.GetAxis("Vertical") > 0 && isOnFloor == true)
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            Debug.Log("jump");
-            rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                rb.velocity = Vector2.up * jumpSpeed;
+                rightJump = true;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                rb.velocity = Vector2.up * jumpSpeed;
+                leftJump = true;
+            }
+            else
+            {
+                rb.velocity = Vector2.up * jumpSpeed;
+            }
+            
         }
         
+    }
+
+    void Move()
+    {
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                rb.velocity = new Vector2(-speed, rb.velocity.y);
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                rb.velocity = new Vector2(speed, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+        
+    }
+
+    void resetJump()
+    {
+        if (rightJump == true)
+        {
+            rightJump = false;
+        }
+        else if (leftJump == true)
+        {
+            leftJump = false;
+        }
+    }
+
+    void maintainJump()
+    {
+        if (rightJump == true)
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+        }
+        else if (leftJump == true)
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+        }
     }
 }
