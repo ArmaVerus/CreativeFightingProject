@@ -5,16 +5,27 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed; //the speed in which the character moves.
+
     public float jumpSpeed; //the speed in which the player jumps.
+
     private Rigidbody2D rb; //the rigidbody initialization
+
     private Animator anim; //initializing the animations
+
     bool rightJump = false; //Are we jumping right?
+
     bool leftJump = false; //Are we jumping left? these are needed for handling the velocity scripts
+
     public bool isOnFloor = false; //check if the player is on the floor.
+
     public GameObject fireBall; //initializing the fireball projectile, which our player can throw
+
     float timeStamp = 0.0f; //Collecting a timestamp of the time, this will be useful for logging difference in time as Time.time never resets.
+
     int coolDown = 0; //a Cooldown timer so that we can't cover the screen with fireballs
+
     int frameCount = 0; //a Framecounter so that an animation has adequate time to play
+
     int[] commandArray = new int[3] { 5, 5, 5 };/*initializing an array for command checking, this is similar to a system I used for a previous assignment on a
     controller, I am re-applying it here as it was a very effective way of input checking by asserting whether or not said commands were ran, I believe since
     the array is fixed to a specific set of memory, I won't incur any memory leaks as a result.

@@ -21,4 +21,12 @@ public class Fireball : MonoBehaviour
             Destroy(this.gameObject); //Destroy the prefab, otherwise it will take up computing space.
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Hurtbox")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
