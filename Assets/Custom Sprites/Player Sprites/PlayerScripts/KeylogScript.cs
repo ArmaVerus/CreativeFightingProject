@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class KeylogScript : MonoBehaviour
 {
-    List<int> log = new List<int>(); //Initializing a list as its dynamic and has an indefinite amount of capacity, may incur memory problems
-    enum previousKey { };
+    List<string> log = new List<string>(); //Initializing a list as its dynamic and has an indefinite amount of capacity, may incur memory problems
+    string previousKey;
+    string currentKey;
+    bool duplicateKey;
 
     /*
      [7][8][9]
@@ -19,12 +21,76 @@ public class KeylogScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        previousKey = "No Key Yet";
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentKey = currentKeyCheck();
+        duplicateKey = string.Equals(previousKey, currentKey);
+        if (!duplicateKey)
+        {
+            commandLogger();
+        }
+    }
+
+    string currentKeyCheck()
+    {
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                return "5";
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                return "1";
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                return "3";
+            }
+            else
+            {
+                return "2";
+            }
+        }
+        else if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                return "7";
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                return "9";
+            }
+            else
+            {
+                return "8";
+            }
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                return "5";
+            }
+            else
+            {
+                return "6";
+            }
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            return "4";
+        }
+        else
+        {
+            return "none";
+        };
+
 
     }
 
@@ -34,61 +100,60 @@ public class KeylogScript : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                log.Add(5); //Neutral Input
+                log.Add("5"); //Neutral Input
+                previousKey = "5";
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
-                log.Add(1); //Down Left
+                log.Add("1"); //Down Left
+                previousKey = "1";
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                log.Add(3); //Down Right
+                log.Add("3"); //Down Right
+                previousKey = "3";
             }
             else
             {
-                log.Add(2); //Down
+                log.Add("2"); //Down
+                previousKey = "2";
             }
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                log.Add(5); //Neutral Input
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                log.Add(7); //Up left
+                log.Add("7"); //Up left
+                previousKey = "7";
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                log.Add(9); //Up right
+                log.Add("9"); //Up right
+                previousKey = "9";
             }
             else
             {
-                log.Add(8); //Up
+                log.Add("8"); //Up
+                previousKey = "8";
             }
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                log.Add(5); //Neutral
+                log.Add("5"); //Neutral
+                previousKey = "5";
             }
             else
             {
-                log.Add(6); //Right
+                log.Add("6"); //Right
+                previousKey = "6";
             }
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                log.Add(5); //Neutral
-            }
-            else
-            {
-                log.Add(4); //Left
-            }
+            log.Add("4"); //Left
+            previousKey = "4";
         }
 
 
