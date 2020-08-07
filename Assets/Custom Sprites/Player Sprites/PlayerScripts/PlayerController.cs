@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("speed", rb.velocity.x);
         if (isOnFloor == true)
         {
-            //throwFireball(); //Can only throw fireballs when they're true, Fireballs are not physics based, and inputs should be based on frame.
+            throwFireball(); //Can only throw fireballs when they're true, Fireballs are not physics based, and inputs should be based on frame.
             //checkFireball();
 
         }
@@ -119,37 +119,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void checkFireballString()
-    {
-
-    }
-
-    //void checkFireball()
+    //void checkFireballString()
     //{
 
-    //    if (fireBallIndex == 0 || Time.time - lastInputTime < acceptableTime)
-    //    {
-
-    //        if (currentInput == fireballSequence[fireBallIndex])
-    //        {
-                
-    //            fireBallIndex++;
-    //            lastInputTime = Time.time;
-    //            if (fireBallIndex == fireballSequence.Length)
-    //            {
-    //                createFireball();
-    //                fireBallIndex = 0;
-
-    //            }
-    //            Debug.Log(fireBallIndex);
-
-    //        }
-    //        else
-    //        {
-    //            fireBallIndex = 0;
-    //        }
-    //    }
     //}
+
+    void checkFireball()
+    {
+
+        if (fireBallIndex == 0 || Time.time - lastInputTime < acceptableTime)
+        {
+
+            if (currentInput == fireballSequence[fireBallIndex])
+            {
+
+                fireBallIndex++;
+                lastInputTime = Time.time;
+                if (fireBallIndex == fireballSequence.Length)
+                {
+                    createFireball();
+                    fireBallIndex = 0;
+
+                }
+                Debug.Log(fireBallIndex);
+
+            }
+            else
+            {
+                fireBallIndex = 0;
+            }
+        }
+    }
 
     void createFireball()
     {
@@ -158,22 +158,22 @@ public class PlayerController : MonoBehaviour
         f.transform.position = new Vector2(rb.position.x + 3.0f, 1.39f); //adjust the Fireball's position
     }
 
-    //void throwFireball() //The code for throwing a fireball.
-    //{
-    //    if (Input.GetKey(KeyCode.F) && coolDown == 0)
-    //    {
-    //        if ((commandArray[0] == 2 && //Checking if all inputs in the array are in the right order.
-    //         commandArray[1] == 3 &&
-    //         commandArray[2] == 6))
-    //        {
-    //            createFireball();
-    //            clearArray(); //Clear out the array so more Fireballs don't spawn for free.
-    //            coolDown = 2; //Set Cooldown Timer
-    //            frameCount = 8; //Set Frame counter
-    //        }
-    //    }
-        
-    //}
+    void throwFireball() //The code for throwing a fireball.
+    {
+        if (Input.GetKey(KeyCode.F) && coolDown == 0)
+        {
+            if ((commandArray[0] == 2 && //Checking if all inputs in the array are in the right order.
+             commandArray[1] == 3 &&
+             commandArray[2] == 6))
+            {
+                createFireball();
+                clearArray(); //Clear out the array so more Fireballs don't spawn for free.
+                coolDown = 2; //Set Cooldown Timer
+                frameCount = 8; //Set Frame counter
+            }
+        }
+
+    }
 
     void handleCooldown() //a function for determining cooldown functionality.
     {
@@ -227,18 +227,18 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.RightArrow)) //Are we also pressing right?
             {
-                //if (!dupChecker(3))
-                //{
-                //    refreshArray(3); //Enter 3 into the commandArray
-                //}
+                if (!dupChecker(3))
+                {
+                    refreshArray(3); //Enter 3 into the commandArray
+                }
                 currentInput = 3;
             }
             else
             {
-                //if (!dupChecker(2))
-                //{
-                //    refreshArray(2); //Otherwise enter 2 into the commandArray
-                //}
+                if (!dupChecker(2))
+                {
+                    refreshArray(2); //Otherwise enter 2 into the commandArray
+                }
                 currentInput = 2;
             }
         }
@@ -248,10 +248,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.RightArrow)) //Check if we're pressing right
         {
-            //if (!dupChecker(6))
-            //{
-            //    refreshArray(6); //Log "6" which is the 1-9 model of looking right into the commandArray
-            //}
+            if (!dupChecker(6))
+            {
+                refreshArray(6); //Log "6" which is the 1-9 model of looking right into the commandArray
+            }
             currentInput = 6;
             rb.velocity = new Vector2(speed, rb.velocity.y); //Set the speed for us moving.
         }
