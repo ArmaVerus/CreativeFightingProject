@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Hurtbox
+  - TargetHitbox
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - Pushbox
   - Hitbox
-  - 
+  - Floor
   - 
   - 
   - 

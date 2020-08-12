@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim; //initializing the animations
 
-    bool rightJump = false; //Are we jumping right?
+    public bool rightJump = false; //Are we jumping right?
 
-    bool leftJump = false; //Are we jumping left? these are needed for handling the velocity scripts
+    public bool leftJump = false; //Are we jumping left? these are needed for handling the velocity scripts
 
     public bool isOnFloor = false; //check if the player is on the floor.
 
@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour
 
     int frameCount = 0; //a Framecounter so that an animation has adequate time to play
 
-    int[] fireballSequence = new int[4] { 2, 3, 6, 10 }; //Attempting new sequence, trying to match up inputs into Fireball.
+    static int[] fireballSequence = new int[4] { 2, 3, 6, 10 }; //Attempting new sequence, trying to match up inputs into Fireball.
 
-    string fireBallString = "236F";
+    static string fireBallString = "236F";
 
     string currentString;
 
@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     float lastInputTime = 0;
 
     float acceptableTime = 100.0f;
+
+    public float yPos;
 
     float elapsedTime = 0;
 
@@ -63,6 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();//Initialize the Physics object.
         anim = GetComponent<Animator>(); //Initialize the animator.
+        yPos = rb.position.y;
     }
 
     // Update is called once per frame
