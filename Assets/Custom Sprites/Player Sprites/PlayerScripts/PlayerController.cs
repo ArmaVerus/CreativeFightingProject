@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isOnFloor = false; //check if the player is on the floor.
 
+    public bool isStuck = false; //a checker if the player is stuck or will be stuck
+
     public GameObject fireBall; //initializing the fireball projectile, which our player can throw
 
     float timeStamp = 0.0f; //Collecting a timestamp of the time, this will be useful for logging difference in time as Time.time never resets.
@@ -101,7 +103,16 @@ public class PlayerController : MonoBehaviour
         }
         else if (isOnFloor == false)
         {
-            maintainJump(); //this code is designed to handle the jumping physics while in the air.
+            if (isStuck)
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+            else
+            {
+                maintainJump();
+            }
+            //this code is designed to handle the jumping physics while in the air.
+            //positionCorrect();
         }
     }
 
@@ -299,4 +310,12 @@ public class PlayerController : MonoBehaviour
             currentInput = 10;
         }
     }
+
+    //void positionCorrect()
+    //{
+    //    if (isStuck)
+    //    {
+    //        rb.transform.position = new Vector2(rb.position.x + 0.01f, rb.position.y);
+    //    }
+    //}
 }

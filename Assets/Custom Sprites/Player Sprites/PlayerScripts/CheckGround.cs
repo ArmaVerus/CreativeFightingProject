@@ -12,8 +12,8 @@ public class CheckGround : MonoBehaviour
     void Start()
     {
         playerDetail = gameObject.transform.parent.gameObject; //initialize the gameObject
-        parentPlayer = playerDetail.GetComponent<PlayerController>();
-        groundYPos = parentPlayer.yPos;
+        //parentPlayer = playerDetail.GetComponent<PlayerController>();
+        //groundYPos = parentPlayer.yPos;
     }
 
     // Update is called once per frame
@@ -26,7 +26,8 @@ public class CheckGround : MonoBehaviour
     {
         if (collision.collider.tag == "Floor") //If that Collider's tagged as being part of the floor
         {
-            playerDetail.GetComponent<PlayerController>().isOnFloor = true; //State that we are now on the floor.
+            playerDetail.GetComponent<PlayerController>().isOnFloor = true;
+            playerDetail.GetComponent<PlayerController>().isStuck = false;//State that we are now on the floor.
         }
         //else if (collision.collider.tag == "TargetHitbox")
         //{
@@ -41,17 +42,11 @@ public class CheckGround : MonoBehaviour
         //}
     }
 
-    private void OnCollisionExit2D(Collision2D collision) //When the collider leaves contact with a collider
+    private void OnCollisionExit2D(Collision2D collision) //When the collider leaves contact with another collider
     {
         if (collision.collider.tag == "Floor") //If the collider we separated from was the floor
         {
             playerDetail.GetComponent<PlayerController>().isOnFloor = false; //We're no longer on the floor
         }
     }
-
-    //void collisionCorrection()
-    //{
-    //    float currentYPos = playerDetail.GetComponent<PlayerController>().yPos;
-
-    //}
 }
