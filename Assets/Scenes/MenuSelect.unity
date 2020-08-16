@@ -202,7 +202,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1976149862}
-        m_MethodName: loadSceneFireball
+        m_MethodName: loadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -335,6 +335,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985229124}
   m_CullTransparentMesh: 0
+--- !u!114 &1231664329 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3231113398830869777, guid: 8b7766bf00b84ed4182bad870bf21fab,
+    type: 3}
+  m_PrefabInstance: {fileID: 3231113397638011352}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1d960a21cb7b649988c479a0a7aadb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1683078614
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,8 +622,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1976149862}
-        m_MethodName: loadSceneFireball
+      - m_Target: {fileID: 1976149863}
+        m_MethodName: loadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -741,6 +753,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1976149861}
   - component: {fileID: 1976149862}
+  - component: {fileID: 1976149864}
+  - component: {fileID: 1976149863}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -784,6 +798,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cce7b0d4cdd1c7459533ced799cc958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageController: {fileID: 1231664329}
+--- !u!114 &1976149863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976149860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e5ca8efff2884d937fde38ad06d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageController: {fileID: 1231664329}
+--- !u!114 &1976149864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976149860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e84bc5bce213f419928839d72a7fa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageController: {fileID: 1231664329}
 --- !u!1 &2064465742
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,8 +989,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1976149862}
-        m_MethodName: loadSceneFireball
+      - m_Target: {fileID: 1976149864}
+        m_MethodName: loadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1003,3 +1044,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073743841}
   m_CullTransparentMesh: 0
+--- !u!1001 &3231113397638011352
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3231113398830869776, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_Name
+      value: StageController
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 607.87506
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 353.3884
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1976.7383
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231113398830869778, guid: 8b7766bf00b84ed4182bad870bf21fab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b7766bf00b84ed4182bad870bf21fab, type: 3}

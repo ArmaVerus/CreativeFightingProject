@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadFireball : MonoBehaviour
 {
+    public StageControl stageController;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,9 @@ public class SceneLoadFireball : MonoBehaviour
         
     }
 
-    public void loadSceneFireball()
+    public void loadScene()
     {
-        SceneManager.LoadScene("FireballScene");
+        stageController.GetComponent<StageControl>().Stage = 1;
+        SceneManager.LoadScene("FightScene");
     }
 }

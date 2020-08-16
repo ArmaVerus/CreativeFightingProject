@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject stageController;
+
+    public int currentStage;
+
     public float speed; //the speed in which the character moves.
 
     public float jumpSpeed; //the speed in which the player jumps.
@@ -30,19 +34,19 @@ public class PlayerController : MonoBehaviour
 
     static int[] fireballSequence = new int[4] { 2, 3, 6, 10 }; //Attempting new sequence, trying to match up inputs into Fireball.
 
-    static string fireBallString = "236F";
+    //static string fireBallString = "236F";
 
     string currentString;
 
-    int fireBallIndex = 0;
+    //int fireBallIndex = 0;
 
-    float lastInputTime = 0;
+    //float lastInputTime = 0;
 
-    float acceptableTime = 100.0f;
+    //float acceptableTime = 100.0f;
 
     public float yPos;
 
-    float elapsedTime = 0;
+    //float elapsedTime = 0;
 
     int currentInput = 0;
 
@@ -65,6 +69,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stageController = GameObject.Find("StageController");
+        currentStage = stageController.GetComponent<StageControl>().Stage;
         rb = GetComponent<Rigidbody2D>();//Initialize the Physics object.
         anim = GetComponent<Animator>(); //Initialize the animator.
         yPos = rb.position.y;
@@ -138,32 +144,32 @@ public class PlayerController : MonoBehaviour
 
     //}
 
-    void checkFireball()
-    {
+    //void checkFireball()
+    //{
 
-        if (fireBallIndex == 0 || Time.time - lastInputTime < acceptableTime)
-        {
+    //    if (fireBallIndex == 0 || Time.time - lastInputTime < acceptableTime)
+    //    {
 
-            if (currentInput == fireballSequence[fireBallIndex])
-            {
+    //        if (currentInput == fireballSequence[fireBallIndex])
+    //        {
 
-                fireBallIndex++;
-                lastInputTime = Time.time;
-                if (fireBallIndex == fireballSequence.Length)
-                {
-                    createFireball();
-                    fireBallIndex = 0;
+    //            fireBallIndex++;
+    //            lastInputTime = Time.time;
+    //            if (fireBallIndex == fireballSequence.Length)
+    //            {
+    //                createFireball();
+    //                fireBallIndex = 0;
 
-                }
-                Debug.Log(fireBallIndex);
+    //            }
+    //            Debug.Log(fireBallIndex);
 
-            }
-            else
-            {
-                fireBallIndex = 0;
-            }
-        }
-    }
+    //        }
+    //        else
+    //        {
+    //            fireBallIndex = 0;
+    //        }
+    //    }
+    //}
 
     void createFireball()
     {
