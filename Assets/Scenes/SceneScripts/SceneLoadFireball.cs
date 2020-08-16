@@ -7,6 +7,7 @@ public class SceneLoadFireball : MonoBehaviour
 {
     public StageControl stageController;
     // Start is called before the first frame update
+
     void Start()
     {
         

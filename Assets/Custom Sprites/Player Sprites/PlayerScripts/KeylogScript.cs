@@ -15,9 +15,10 @@ public class KeylogScript : MonoBehaviour
     string previousKey;
     string currentKey;
     bool duplicateKey;
-    bool saved = false;
+    bool saved;
     public GameObject stageTarget; //getting the stage target for this stage.
     public TargetScript st;
+    
 
     /*
      [7][8][9]
@@ -33,6 +34,7 @@ public class KeylogScript : MonoBehaviour
     {
         previousKey = "No Key Yet";
         st = stageTarget.GetComponent<TargetScript>();
+        saved = false;
     }
 
     // Update is called once per frame
@@ -53,58 +55,62 @@ public class KeylogScript : MonoBehaviour
 
     string currentKeyCheck()
     {
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.F))
+        {
+            return "Punch";
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                return "5";
+                return "Neutral";
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
-                return "1";
+                return "Down-Left";
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                return "3";
+                return "Down-Right";
             }
             else
             {
-                return "2";
+                return "Down";
             }
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                return "7";
+                return "Up-Left";
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                return "9";
+                return "Up-Right";
             }
             else
             {
-                return "8";
+                return "Up";
             }
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                return "5";
+                return "Neutral";
             }
             else
             {
-                return "6";
+                return "Right";
             }
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            return "4";
+            return "Left";
         }
         else
         {
-            return "none";
+            return "None";
         };
 
 
@@ -112,64 +118,69 @@ public class KeylogScript : MonoBehaviour
 
     void commandLogger()
     {
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.F))
+        {
+            log.Add("Punch"); //Punching is necessary to throw a Fireball
+            previousKey = "Punch";
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                log.Add("5"); //Neutral Input
-                previousKey = "5";
+                log.Add("Neutral"); //Neutral Input
+                previousKey = "Neutral";
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
-                log.Add("1"); //Down Left
-                previousKey = "1";
+                log.Add("Down-Left"); //Down Left
+                previousKey = "Down-Left";
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                log.Add("3"); //Down Right
-                previousKey = "3";
+                log.Add("Down-Right"); //Down Right
+                previousKey = "Down-Right";
             }
             else
             {
-                log.Add("2"); //Down
-                previousKey = "2";
+                log.Add("Down"); //Down
+                previousKey = "Down";
             }
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                log.Add("7"); //Up left
-                previousKey = "7";
+                log.Add("Up-Right"); //Up left
+                previousKey = "Up-Left";
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                log.Add("9"); //Up right
-                previousKey = "9";
+                log.Add("Up-Right"); //Up right
+                previousKey = "Up-Right";
             }
             else
             {
-                log.Add("8"); //Up
-                previousKey = "8";
+                log.Add("Up"); //Up
+                previousKey = "Up";
             }
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                log.Add("5"); //Neutral
-                previousKey = "5";
+                log.Add("Neutral"); //Neutral
+                previousKey = "Neutral";
             }
             else
             {
-                log.Add("6"); //Right
-                previousKey = "6";
+                log.Add("Right"); //Right
+                previousKey = "Right";
             }
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            log.Add("4"); //Left
-            previousKey = "4";
+            log.Add("Left"); //Left
+            previousKey = "Left";
         }
 
 
@@ -177,10 +188,12 @@ public class KeylogScript : MonoBehaviour
 
     private string storagePath()
     {
+        DateTime theTime = DateTime.Now;
+        string datetime = theTime.ToString("yyyy-MM-dd-HH-mm");
 #if UNITY_EDITOR
-        return Application.dataPath + "/LogData/"  + "Last_Log.csv";
+        return Application.dataPath + "/LogData/"  + "CommandLog_" + datetime + ".csv";
 #else
-        return Application.dataPath + "/" + "Last_Log.csv";
+        return Application.dataPath + "/" + "CommandLog_" + datetime + ".csv";
 #endif
     }
 
