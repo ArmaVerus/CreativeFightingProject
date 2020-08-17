@@ -354,7 +354,6 @@ public class PlayerController : MonoBehaviour
     {
         if (rightJump == true) //So while we're jumping right.
         {
-            Debug.Log("I'm here guys");
             rb.velocity = new Vector2(speed, rb.velocity.y); //We maintain a constant speed, in fighting games you can't back out of a jumping direction.
             //hence the need for variables, for which jump is being used.
         }
