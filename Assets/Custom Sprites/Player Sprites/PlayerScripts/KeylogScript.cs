@@ -19,6 +19,7 @@ public class KeylogScript : MonoBehaviour
     bool saved;
     public GameObject stageTarget; //getting the stage target for this stage.
     public TargetScript st;
+    string timeTaken;
     
 
     /*
@@ -236,7 +237,7 @@ public class KeylogScript : MonoBehaviour
 
     void outputData(string filePath, List<string> input)
     {
-        string timeTaken = counter.GetComponent<TimerCount>().storedTime.ToString("0");
+        timeTaken = counter.GetComponent<TimerCount>().storedTime.ToString("0");
         StreamWriter output = new StreamWriter(filePath);
 
         output.WriteLine("Seconds," + timeTaken);

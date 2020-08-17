@@ -22,7 +22,7 @@ public class TimerCount : MonoBehaviour
 
         if (st.currentHealth > 0) //we want to stop the timer when the stage target has 0 health so we know how much time it took to win.
         {
-            Timer.text = storedTime.ToString("0");//This command turns the float to a string, 0 means that it will only use the first character in the string
+            Timer.text = storedTime.ToString("0");
         }
 
     }
