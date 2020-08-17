@@ -1,7 +1,40 @@
 fileFormatVersion: 2
 guid: 2ad24ca44bd8f844db083d454d36434b
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5947980886107000469
+    second: RedStickShoryuTatsu_0
+  - first:
+      213: 5719695629937728009
+    second: RedStickShoryuTatsu_1
+  - first:
+      213: 9217404165952171950
+    second: RedStickShoryuTatsu_2
+  - first:
+      213: 90116867810647246
+    second: RedStickShoryuTatsu_3
+  - first:
+      213: -8904550257461424733
+    second: RedStickShoryuTatsu_4
+  - first:
+      213: -6725735239647723677
+    second: RedStickShoryuTatsu_5
+  - first:
+      213: -7722867775375487009
+    second: RedStickShoryuTatsu_6
+  - first:
+      213: -8761593447834174469
+    second: RedStickShoryuTatsu_7
+  - first:
+      213: -1608584835775498760
+    second: RedStickShoryuTatsu_8
+  - first:
+      213: -6812591916289735423
+    second: RedStickShoryuTatsu_9
+  - first:
+      213: 3461801280862363407
+    second: RedStickShoryuTatsu_10
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,12 +73,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 15
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,9 +103,252 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 147
+        width: 51
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 192291733b001fe4ba98de545f34a901
+      internalID: 5947980886107000469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_1
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 149
+        width: 46
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed2e9292504efab44bc550f6e939a32d
+      internalID: 5719695629937728009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_2
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 148
+        width: 45
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c99548480418c68418af9cbeee9f44c5
+      internalID: 9217404165952171950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_3
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 155
+        width: 30
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 032330c27cf7b714ba4fe69516627267
+      internalID: 90116867810647246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_4
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 15
+        width: 51
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 362f22c676a32594eadf77100d6244eb
+      internalID: -8904550257461424733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_5
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 15
+        width: 70
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0febf8ff5e786df4bb6767ca85f7504f
+      internalID: -6725735239647723677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_6
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 17
+        width: 42
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f82fec3b1b589dc4ea5c5a5da5eb529e
+      internalID: -7722867775375487009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_7
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 10
+        width: 64
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39bcf2b9b932edc468cc7ed0fec3c371
+      internalID: -8761593447834174469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_8
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 43
+        width: 83
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 499dffff919b4c747ac237924ff0abac
+      internalID: -1608584835775498760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_9
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 45
+        width: 83
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9177b089b23856c4e84087d5cda97c1a
+      internalID: -6812591916289735423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedStickShoryuTatsu_10
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 42
+        width: 83
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3226b61a956817f47adad19ea9220ea4
+      internalID: 3461801280862363407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

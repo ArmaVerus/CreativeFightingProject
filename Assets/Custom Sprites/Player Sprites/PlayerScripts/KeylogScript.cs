@@ -11,6 +11,7 @@ using System;
 
 public class KeylogScript : MonoBehaviour
 {
+    public GameObject counter;
     List<string> log = new List<string>(); //Initializing a list as its dynamic and has an indefinite amount of capacity, may incur memory problems
     string previousKey;
     string currentKey;
@@ -55,11 +56,7 @@ public class KeylogScript : MonoBehaviour
 
     string currentKeyCheck()
     {
-        if (Input.GetKey(KeyCode.F))
-        {
-            return "Punch";
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -86,7 +83,14 @@ public class KeylogScript : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                return "Up-Right";
+                if (Input.GetKey(KeyCode.F))
+                {
+                    return "Punch";
+                }
+                else
+                {
+                    return "Up-Right";
+                }
             }
             else
             {
@@ -99,6 +103,10 @@ public class KeylogScript : MonoBehaviour
             {
                 return "Neutral";
             }
+            else if (Input.GetKey(KeyCode.F))
+            {
+                return "Punch";
+            }
             else
             {
                 return "Right";
@@ -106,7 +114,15 @@ public class KeylogScript : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            return "Left";
+            if (Input.GetKey(KeyCode.G))
+            {
+                return "Punch";
+            }
+            else
+            {
+                return "Left";
+            }
+
         }
         else
         {
@@ -118,12 +134,7 @@ public class KeylogScript : MonoBehaviour
 
     void commandLogger()
     {
-        if (Input.GetKey(KeyCode.F))
-        {
-            log.Add("Punch"); //Punching is necessary to throw a Fireball
-            previousKey = "Punch";
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -137,8 +148,17 @@ public class KeylogScript : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                log.Add("Down-Right"); //Down Right
-                previousKey = "Down-Right";
+                if (Input.GetKey(KeyCode.F))
+                {
+                    log.Add("Down-Right");
+                    log.Add("Punch"); //Punching is necessary to perform an Uppercut
+                    previousKey = "Punch";
+                }
+                else
+                {
+                    log.Add("Down-Right"); //Down Right
+                    previousKey = "Down-Right";
+                }
             }
             else
             {
@@ -171,6 +191,12 @@ public class KeylogScript : MonoBehaviour
                 log.Add("Neutral"); //Neutral
                 previousKey = "Neutral";
             }
+            else if (Input.GetKey(KeyCode.F))
+            {
+                log.Add("Right");
+                log.Add("Punch"); //Punching is necessary to throw a Fireball
+                previousKey = "Punch";
+            }
             else
             {
                 log.Add("Right"); //Right
@@ -179,8 +205,17 @@ public class KeylogScript : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            log.Add("Left"); //Left
-            previousKey = "Left";
+            if (Input.GetKey(KeyCode.G))
+            {
+                log.Add("Left");
+                log.Add("Kick"); //Kicking is necessary for the Spin-Kick
+                previousKey = "Kick";
+            }
+            else
+            {
+                log.Add("Left"); //Left
+                previousKey = "Left";
+            }
         }
 
 
@@ -199,18 +234,25 @@ public class KeylogScript : MonoBehaviour
 
     void outputData(string filePath, List<string> input)
     {
+        string timeTaken = counter.GetComponent<TimerCount>().storedTime.ToString("0");
         StreamWriter output = new StreamWriter(filePath);
+
+        output.WriteLine("Seconds," + timeTaken);
+        output.WriteLine("No. of Inputs," + input.Count);
+        output.WriteLine("Inputs:");
 
         for (int i = 0; i < input.Count; i++)
         {
-            if (i == 0)
-            {
-                output.Write(input[i]);
-            }
-            else
-            {
-                output.Write("," + input[i]);
-            }
+            output.WriteLine(input[i]);
+
+            //if (i == 0)
+            //{
+            //    output.Write(input[i]);
+            //}
+            //else
+            //{
+            //    output.Write("," + input[i]); //This is useful as a table but reading the inputs is God-awful like this, so we'll use a newline for each input
+            //}
         }
 
         output.Flush();

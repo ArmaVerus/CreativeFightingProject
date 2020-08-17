@@ -24,7 +24,19 @@ public class PlayerController : MonoBehaviour
 
     public bool isStuck = false; //a checker if the player is stuck or will be stuck
 
+    public bool isRising = false;
+
+    public bool isJumping = false;
+
+    public bool isSpinning = false;
+
+    float startTime;
+
     public GameObject fireBall; //initializing the fireball projectile, which our player can throw
+
+    public GameObject firePunch;
+
+    public GameObject whirlwind;
 
     float timeStamp = 0.0f; //Collecting a timestamp of the time, this will be useful for logging difference in time as Time.time never resets.
 
@@ -32,21 +44,13 @@ public class PlayerController : MonoBehaviour
 
     int frameCount = 0; //a Framecounter so that an animation has adequate time to play
 
-    static int[] fireballSequence = new int[4] { 2, 3, 6, 10 }; //Attempting new sequence, trying to match up inputs into Fireball.
-
-    //static string fireBallString = "236F";
-
     string currentString;
-
-    //int fireBallIndex = 0;
-
-    //float lastInputTime = 0;
-
-    //float acceptableTime = 100.0f;
 
     public float yPos;
 
-    //float elapsedTime = 0;
+    public float ySpeed;
+
+    public float xSpeed;
 
     int currentInput = 0;
 
@@ -79,15 +83,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("isJumping", !isOnFloor); //Set the animations for these as they need to be checked every frame.
-        anim.SetFloat("speed", rb.velocity.x);
-        if (isOnFloor == true)
+        setAnimations();//Set the animations for these as they need to be checked every frame.
+        ySpeed = rb.velocity.y;
+        xSpeed = rb.velocity.x; //need to store these variables as the variables themselves are private and I need to access them.
+        if (isOnFloor == true && !isSpinning)
         {
-            throwFireball(); //Can only throw fireballs when they're true, Fireballs are not physics based, and inputs should be based on frame.
-            //checkFireball();
-
+            if (currentStage == 1)
+            {
+                throwFireball(); //Can only throw fireballs when they're true, Fireballs are not physics based, and inputs should be based on frame.
+            }
+            if (currentStage == 2)
+            {
+                throwUppercut();
+            }
+            if (currentStage == 3)
+            {
+                throwWhirlwind();
+            }
         }
-        handleCooldown(); //this handles the cooldown for the fireball after its been thrown.
+        handleCooldown(); //this handles the cooldown for abilities after they've been used
         if (frameCount == 0)
         {
             anim.SetBool("isFiring", false); //Because the animation is so quick and we don't want it repeating I had to put a frame limiter on the animation.
@@ -100,12 +114,18 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() //All the command functions will be nested here, FixedUpdate is better for Physics
     {
-        if (isOnFloor == true)
+        ySpeed = rb.velocity.y;
+        if (isOnFloor == true && !isSpinning)
         {
             resetJump(); //to offset boolean values for jumping when 
             Jump();
             Move();
 
+        }
+        else if (isSpinning)
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+            checkAirTime();
         }
         else if (isOnFloor == false)
         {
@@ -139,43 +159,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //void checkFireballString()
-    //{
-
-    //}
-
-    //void checkFireball()
-    //{
-
-    //    if (fireBallIndex == 0 || Time.time - lastInputTime < acceptableTime)
-    //    {
-
-    //        if (currentInput == fireballSequence[fireBallIndex])
-    //        {
-
-    //            fireBallIndex++;
-    //            lastInputTime = Time.time;
-    //            if (fireBallIndex == fireballSequence.Length)
-    //            {
-    //                createFireball();
-    //                fireBallIndex = 0;
-
-    //            }
-    //            Debug.Log(fireBallIndex);
-
-    //        }
-    //        else
-    //        {
-    //            fireBallIndex = 0;
-    //        }
-    //    }
-    //}
+    void setAnimations()
+    {
+        anim.SetBool("isSpinning", isSpinning);
+        anim.SetBool("isRising", isRising);
+        anim.SetBool("isJumping", isJumping);
+        anim.SetFloat("speed", rb.velocity.x);
+        anim.SetFloat("jumpSpeed", rb.velocity.y);
+    }
 
     void createFireball()
     {
         anim.SetBool("isFiring", true);
         GameObject f = Instantiate(fireBall) as GameObject; //create the Fireball
         f.transform.position = new Vector2(rb.position.x + 3.0f, 1.39f); //adjust the Fireball's position
+    }
+
+    void createUppercut()
+    {
+        isRising = true;
+        rb.velocity = Vector2.up * jumpSpeed;
+        rightJump = true;
+        GameObject u = Instantiate(firePunch) as GameObject;
+        u.transform.position = new Vector2(rb.position.x + 2.5f, rb.position.y + 3.0f);
+    }
+
+    void checkAirTime()
+    {
+        if (Time.time - startTime > 1.0f)
+        {
+            isSpinning = false;
+        }
+    }
+
+    void createWhirlwind()
+    {
+        xSpeed = speed;
+        startTime = Time.time;
+        isSpinning = true;
+        GameObject w = Instantiate(whirlwind) as GameObject;
+        w.transform.position = new Vector2(rb.position.x, rb.position.y);
     }
 
     void throwFireball() //The code for throwing a fireball.
@@ -187,6 +210,40 @@ public class PlayerController : MonoBehaviour
              commandArray[2] == 6))
             {
                 createFireball();
+                clearArray(); //Clear out the array so more Fireballs don't spawn for free.
+                coolDown = 2; //Set Cooldown Timer
+                frameCount = 8; //Set Frame counter
+            }
+        }
+
+    }
+
+    void throwUppercut() //The code for throwing a fireball.
+    {
+        if (Input.GetKey(KeyCode.F) && coolDown == 0)
+        {
+            if ((commandArray[0] == 6 && //Checking if all inputs in the array are in the right order.
+             commandArray[1] == 2 &&
+             commandArray[2] == 3))
+            {
+                createUppercut();
+                clearArray(); //Clear out the array so more Fireballs don't spawn for free.
+                coolDown = 2; //Set Cooldown Timer
+                frameCount = 8; //Set Frame counter
+            }
+        }
+
+    }
+
+    void throwWhirlwind() //The code for throwing a fireball.
+    {
+        if (Input.GetKey(KeyCode.G) && coolDown == 0)
+        {
+            if ((commandArray[0] == 2 && //Checking if all inputs in the array are in the right order.
+             commandArray[1] == 1 &&
+             commandArray[2] == 4))
+            {
+                createWhirlwind();
                 clearArray(); //Clear out the array so more Fireballs don't spawn for free.
                 coolDown = 2; //Set Cooldown Timer
                 frameCount = 8; //Set Frame counter
@@ -222,18 +279,22 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow)) //Jumping is done by pressing the Up arrow
         {
+            isJumping = true;
             if (Input.GetKey(KeyCode.RightArrow)) //Of course, in fighting games we can jump left or right so we have parameters for that too.
             {
+                arrayLog(9);
                 rb.velocity = Vector2.up * jumpSpeed;
                 rightJump = true;
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
+                arrayLog(7);
                 rb.velocity = Vector2.up * jumpSpeed;
                 leftJump = true;
             }
             else
             {
+                arrayLog(8);
                 rb.velocity = Vector2.up * jumpSpeed;
             }
             
@@ -247,32 +308,25 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.RightArrow)) //Are we also pressing right?
             {
-                if (!dupChecker(3))
-                {
-                    refreshArray(3); //Enter 3 into the commandArray
-                }
-                currentInput = 3;
+                arrayLog(3);
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow)) //Are we also pressing right?
+            {
+                arrayLog(1);
             }
             else
             {
-                if (!dupChecker(2))
-                {
-                    refreshArray(2); //Otherwise enter 2 into the commandArray
-                }
-                currentInput = 2;
+                arrayLog(2);
             }
         }
         else if (Input.GetKey(KeyCode.LeftArrow)) //Check if we're pressing left.
         {
+            arrayLog(4);
             rb.velocity = new Vector2(-speed, rb.velocity.y); //of course we need to move backward, so we use -speed here.
         }
         else if (Input.GetKey(KeyCode.RightArrow)) //Check if we're pressing right
         {
-            if (!dupChecker(6))
-            {
-                refreshArray(6); //Log "6" which is the 1-9 model of looking right into the commandArray
-            }
-            currentInput = 6;
+            arrayLog(6);
             rb.velocity = new Vector2(speed, rb.velocity.y); //Set the speed for us moving.
         }
         else
@@ -300,6 +354,7 @@ public class PlayerController : MonoBehaviour
     {
         if (rightJump == true) //So while we're jumping right.
         {
+            Debug.Log("I'm here guys");
             rb.velocity = new Vector2(speed, rb.velocity.y); //We maintain a constant speed, in fighting games you can't back out of a jumping direction.
             //hence the need for variables, for which jump is being used.
         }
@@ -309,19 +364,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void letterKeyOperations()
+    void arrayLog(int x)
     {
-        if (Input.GetKey(KeyCode.F))
+        if (!dupChecker(x))
         {
-            currentInput = 10;
+            refreshArray(x); //Log "6" which is the 1-9 model of looking right into the commandArray
         }
+        currentInput = x;
     }
-
-    //void positionCorrect()
-    //{
-    //    if (isStuck)
-    //    {
-    //        rb.transform.position = new Vector2(rb.position.x + 0.01f, rb.position.y);
-    //    }
-    //}
 }

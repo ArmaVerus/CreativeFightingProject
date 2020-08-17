@@ -27,6 +27,8 @@ public class CheckGround : MonoBehaviour
         if (collision.collider.tag == "Floor") //If that Collider's tagged as being part of the floor
         {
             playerDetail.GetComponent<PlayerController>().isOnFloor = true;
+            playerDetail.GetComponent<PlayerController>().isRising = false;
+            playerDetail.GetComponent<PlayerController>().isJumping = false;
             playerDetail.GetComponent<PlayerController>().isStuck = false;//State that we are now on the floor.
         }
         //else if (collision.collider.tag == "TargetHitbox")

@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class TimerCount : MonoBehaviour
 {
-    float storedTime; //Stores the current time as a float
-    float exitTime = 0.0f;
+    public float storedTime; //Stores the current time as a float
     [SerializeField] Text Timer; //This initializes the text field.
     public GameObject stageTarget; //getting the stage target for this stage.
     public TargetScript st;
