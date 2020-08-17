@@ -1,4 +1,4 @@
-﻿#define UNITY_EDITOR
+﻿//#define UNITY_EDITOR
 
 using System.Collections;
 using System.Collections.Generic;
@@ -227,6 +227,8 @@ public class KeylogScript : MonoBehaviour
         string datetime = theTime.ToString("yyyy-MM-dd-HH-mm");
 #if UNITY_EDITOR
         return Application.dataPath + "/LogData/"  + "CommandLog_" + datetime + ".csv";
+#elif UNITY_STANDALONE_WIN
+        return Application.dataPath + "/" + "CommandLog_" + datetime + ".csv";
 #else
         return Application.dataPath + "/" + "CommandLog_" + datetime + ".csv";
 #endif
